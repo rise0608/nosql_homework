@@ -138,7 +138,7 @@ public class RedisUtil {
         Jedis jedis = connection();
         if (null == params || params.length == 0) {
             throw new RuntimeException(this.getClass().getSimpleName()+  "::"
-                    + new Exception().getStackTrace()[0].getMethodName()+"参数不能为空");
+                    + new Exception().getStackTrace()[0].getMethodName()+"parameter can not be null");
         }
         return jedis.hmget(key,params);
     }
@@ -155,7 +155,7 @@ public class RedisUtil {
         Jedis jedis = connection();
         if (null == params || params.length == 0) {
             throw new RuntimeException(this.getClass().getSimpleName()+  "::"
-                    + new Exception().getStackTrace()[0].getMethodName()+"参数不能为空");
+                    + new Exception().getStackTrace()[0].getMethodName()+"parameter can not be null");
         }
         jedis.hdel(key,params);
     }

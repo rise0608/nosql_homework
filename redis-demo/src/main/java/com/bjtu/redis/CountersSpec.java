@@ -1,6 +1,5 @@
 package com.bjtu.redis;
 
-//counter封装类
 public class CountersSpec {
     private String counterName;
     private String counterIndex;

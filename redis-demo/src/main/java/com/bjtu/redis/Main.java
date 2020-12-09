@@ -114,36 +114,44 @@ public class Main {
     }
 
     // main方法
-    public static void main(String[] args) throws Exception {
-        System.out.println("基于redis的counter");
+    public static void main(String[] args){
+        System.out.println("Counter based on redis");
         System.out.println("18301034-陈佳悦\n");
 
         //启动文件监听
         startObserver("src/main/resources", new FileListener());
-        System.out.println("文件监听已开启..");
+        System.out.println("File observer is started..");
         //加载json文件
         loadConfigJson();
-        System.out.println("JSON文件加载完毕..");
+        System.out.println("JSON file is loaded..");
 
         Scanner sc = new Scanner(System.in);
         String str;
         do {
 
-            System.out.println("Actions列表(0退出)：");
+            System.out.println("Actions lists(0 to exit): ");
             for (int i = 0; i < actionList.size(); i++) {
                 System.out.println((i + 1) + ". " + actionList.get(i).getActionType());
             }
-            System.out.println("请选择：");
+            System.out.println("Enter your choice(0~6): ");
             str = sc.nextLine();
             if (str.equals("1") || str.equals("2") || str.equals("3")
                     || str.equals("4") || str.equals("5") || str.equals("6")) {
                 ActionsResolve actionsResolve = new ActionsResolve();
-                actionsResolve.executeAction(actionList.get(Integer.parseInt(str) - 1));
+                try {
+                    actionsResolve.executeAction(actionList.get(Integer.parseInt(str) - 1));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else if (str.equals("0")) {
-                monitor.stop();
+                try {
+                    monitor.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 System.exit(1);
             } else {
-                System.out.println("非法输入！请重新选择action序号（输入0退出）：");
+                System.out.println("Illegal enter! Please enter your choice(0~6): ");
             }
         }
         while (!str.equals("0"));

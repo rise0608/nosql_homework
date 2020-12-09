@@ -12,11 +12,10 @@ final class FileListener extends FileAlterationListenerAdaptor {
     // 文件更改
     @Override
     public void onFileChange(File file) {
-
         Main.lock.compareAndSet(false, true);
-        System.out.println(file.getName() + "文件已更改..");
+        System.out.println(file.getName() + "File has be changed..");
         Main.loadConfigJson();
-        System.out.println("JSON文件已重载..");
+        System.out.println("JSON file has be overloaded..");
         Main.lock.set(false);
     }
 

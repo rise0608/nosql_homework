@@ -2,7 +2,6 @@ package com.bjtu.redis;
 
 import java.util.List;
 
-//actions封装类
 public class ActionsSpec {
 
     private enum ActionType {
@@ -37,17 +36,17 @@ public class ActionsSpec {
             case "INCR_USER_FREQ":
                 this.type = ActionType.INCR_USER_FREQ;
                 break;
+            case "DECR_USER_FREQ":
+                this.type = ActionType.DECR_USER_FREQ;
+                break;
             case "ADD_STRING":
                 this.type = ActionType.ADD_STRING;
                 break;
             case "ADD_LIST":
                 this.type = ActionType.ADD_LIST;
                 break;
-            case "DECR_USER_FREQ":
-                this.type = ActionType.DECR_USER_FREQ;
-                break;
             default:
-                System.out.println("指令类别无效！");
+                System.out.println("Illegal action type!");
                 break;
         }
     }
