@@ -1,0 +1,94 @@
+{
+  "actions": [
+    {
+      "actionName": "INCR_USER",
+      "actionIndex": 1,
+      "describe": "user计数加1",
+      "featureRetrieve": [
+        {
+          "counterName": "userNumDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "userNumIncr"
+        }
+      ]
+    },
+    {
+      "actionName": "DECR_USER",
+      "actionIndex": 2,
+      "describe": "user计数减1",
+      "featureRetrieve": [
+        {
+          "counterName": "userNumDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "userNumDecr"
+        }
+      ]
+    },
+    {
+      "actionName": "INCR_USER_FREQ",
+      "actionIndex": 3,
+      "describe": "用户时段上线数增加",
+      "featureRetrieve": [
+        {
+          "counterName": "userFreqDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "userFreqIncr"
+        }
+      ]
+    },
+    {
+      "actionName": "DECR_USER_FREQ",
+      "actionIndex": 4,
+      "describe": "用户时段上线数减少",
+      "featureRetrieve": [
+        {
+          "counterName": "userFreqDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "userFreqDecr"
+        }
+      ]
+    },
+    {
+      "actionName": "ADD_STRING",
+      "actionIndex": 5,
+      "describe": "插入String",
+      "featureRetrieve": [
+        {
+          "counterName": "stringDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "stringAdd"
+        }
+      ]
+    },
+    {
+      "actionName": "ADD_LIST",
+      "actionIndex": 6,
+      "describe": "添加list中的项",
+      "featureRetrieve": [
+        {
+          "counterName": "listDisplay"
+        }
+      ],
+      "saveCounter": [
+        {
+          "counterName": "listAdd"
+        }
+      ]
+    }
+  ]
+}
