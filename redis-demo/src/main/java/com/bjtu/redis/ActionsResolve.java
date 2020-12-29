@@ -3,7 +3,7 @@ package com.bjtu.redis;
 import java.util.List;
 
 public class ActionsResolve {
-    public void executeAction(ActionsSpec actionsSpec) throws Exception {
+    public void executeAction(ActionsSpec actionsSpec) {
 
         List<String> featureRetrieveList = actionsSpec.getFeatureRetrieve();
         List<String> saveCounterList = actionsSpec.getSaveCounter();

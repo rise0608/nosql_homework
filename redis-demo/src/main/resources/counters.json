@@ -11,7 +11,7 @@
       "counterIndex": "2",
       "type": "num",
       "keyFields": "user",
-      "valueFields": "1"
+      "valueFields": "3"
     },
     {
       "counterName": "userNumDecr",
@@ -32,7 +32,7 @@
       "counterIndex": "5",
       "type": "freq",
       "keyFields": "userFreq",
-      "fields": "2020-12-08 18:30:00",
+      "fields": "2020-12-08 18:00:00",
       "valueFields": "3"
     },
     {
@@ -40,8 +40,8 @@
       "counterIndex": "6",
       "type": "freq",
       "keyFields": "userFreq",
-      "fields": "2020-12-08 18:30:00",
-      "valueFields": "1"
+      "fields": "2020-12-08 18:00:00",
+      "valueFields": "3"
     },
     {
       "counterName": "stringDisplay",

@@ -30,14 +30,39 @@ public class Main {
         counterList = JSON.parseArray(Objects.requireNonNull
                 (JSON.parseObject(counterStr, JSONObject.class))
                 .getJSONArray("counters").toJSONString(), CountersSpec.class);
-        readAction();
+        loadActionList();
+    }
+
+    // 读取json文件
+    public static String readJsonFile(String fileName) {
+        File file = new File(fileName);
+        BufferedReader reader = null;
+        StringBuilder lastStr = new StringBuilder();
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempString;
+            while ((tempString = reader.readLine()) != null) {
+                lastStr.append(tempString);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return lastStr.toString();
     }
 
     // 读取action
-    public static void readAction() {
+    public static void loadActionList() {
         actionList = new ArrayList<>();
-        String path = "src/main/resources/actions.json";
-        String s = readJsonFile(path);
+        String s = readJsonFile("src/main/resources/actions.json");
         JSONObject jobj = JSON.parseObject(s);
         JSONArray actions = jobj.getJSONArray("actions");
         for (Object action : actions) {
@@ -67,32 +92,6 @@ public class Main {
 
             actionList.add(a);
         }
-    }
-
-    // 读取json文件
-    public static String readJsonFile(String fileName) {
-        File file = new File(fileName);
-        BufferedReader reader = null;
-        StringBuilder lastStr = new StringBuilder();
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            String tempString;
-            while ((tempString = reader.readLine()) != null) {
-                lastStr.append(tempString);
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return lastStr.toString();
     }
 
     // 启动文件监听
@@ -125,7 +124,7 @@ public class Main {
         loadConfigJson();
         System.out.println("JSON file is loaded..");
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String str;
         do {
 
@@ -134,7 +133,7 @@ public class Main {
                 System.out.println((i + 1) + ". " + actionList.get(i).getActionType());
             }
             System.out.println("Enter your choice(0~6): ");
-            str = sc.nextLine();
+            str = scanner.nextLine();
             if (str.equals("1") || str.equals("2") || str.equals("3")
                     || str.equals("4") || str.equals("5") || str.equals("6")) {
                 ActionsResolve actionsResolve = new ActionsResolve();

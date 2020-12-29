@@ -10,15 +10,15 @@ public class CountersResolve {
         counterList = Main.getCounterList();
     }
 
-    public void executeCounter(String counterName) throws Exception {
+    public void executeCounter(String counterName) {
         for (CountersSpec countersSpec : counterList) {
             if (countersSpec.getCounterName().equals(counterName)) {
                 this.countersSpec = countersSpec;
             }
         }
         System.out.println("Execute counter: " + countersSpec.getCounterName());
-        int num = 0;
-        String time, time1;
+        int num;
+        String time;
         RedisUtil jedis = new RedisUtil();
 
         switch (countersSpec.getCounterIndex()) {
@@ -34,30 +34,21 @@ public class CountersResolve {
             case "2":
                 System.out.println("keyFields: " + countersSpec.getKeyFields());
                 System.out.println("ValueFields: " + countersSpec.getValueFields());
-                if (jedis.get(countersSpec.getKeyFields()) != null) {
-                    num = Integer.parseInt(jedis.get(countersSpec.getKeyFields()));
-                }
-                num = num + Integer.parseInt(countersSpec.getValueFields());
-                jedis.set(countersSpec.getKeyFields(), String.valueOf(num));
+                jedis.incrBy(countersSpec.getKeyFields(),Long.parseLong(countersSpec.getValueFields()));
                 break;
 
             case "3":
                 System.out.println("keyFields: " + countersSpec.getKeyFields());
                 System.out.println("ValueFields: " + countersSpec.getValueFields());
-                if (jedis.get(countersSpec.getKeyFields()) != null) {
-                    num = Integer.parseInt(jedis.get(countersSpec.getKeyFields()));
-                }
-                num = num - Integer.parseInt(countersSpec.getValueFields());
-                jedis.set(countersSpec.getKeyFields(), String.valueOf(num));
+                jedis.decrBy(countersSpec.getKeyFields(),Long.parseLong(countersSpec.getValueFields()));
                 break;
 
             case "4":
                 System.out.println("keyFields:" + countersSpec.getKeyFields());
                 System.out.println("Fields:" + countersSpec.getFields());
-                time = countersSpec.getFields();
-                time1 = time.substring(0, 14) + "00:00";
-                if (jedis.hget(countersSpec.getKeyFields(), time1) != null) {
-                    num = Integer.parseInt(jedis.hget(countersSpec.getKeyFields(), time1));
+                time = countersSpec.getFields().substring(0, 14) + "00:00";
+                if (jedis.hget(countersSpec.getKeyFields(), time) != null) {
+                    num = Integer.parseInt(jedis.hget(countersSpec.getKeyFields(), time));
                     System.out.println("num (at recent Fields):" + num);
                 } else
                     System.out.println("num (at recent Fields): null");
@@ -67,26 +58,16 @@ public class CountersResolve {
                 System.out.println("keyFields: " + countersSpec.getKeyFields());
                 System.out.println("Fields: " + countersSpec.getFields());
                 System.out.println("ValueFields: " + countersSpec.getValueFields());
-                time = countersSpec.getFields();
-                time1 = time.substring(0, 14) + "00:00";
-                if (jedis.hget(countersSpec.getKeyFields(), time1) != null) {
-                    num = Integer.parseInt(jedis.hget(countersSpec.getKeyFields(), time1));
-                }
-                num = num + Integer.parseInt(countersSpec.getValueFields());
-                jedis.hset(countersSpec.getKeyFields(), time1, String.valueOf(num));
+                time = countersSpec.getFields().substring(0, 14) + "00:00";
+                jedis.hincrBy(countersSpec.getKeyFields(), time,Long.parseLong(countersSpec.getValueFields()));
                 break;
 
             case "6":
                 System.out.println("keyFields: " + countersSpec.getKeyFields());
                 System.out.println("Fields: " + countersSpec.getFields());
                 System.out.println("ValueFields: " + countersSpec.getValueFields());
-                time = countersSpec.getFields();
-                time1 = time.substring(0, 14) + "00:00";
-                if (jedis.hget(countersSpec.getKeyFields(), time1) != null) {
-                    num = Integer.parseInt(jedis.hget(countersSpec.getKeyFields(), time1));
-                }
-                num = num - Integer.parseInt(countersSpec.getValueFields());
-                jedis.hset(countersSpec.getKeyFields(), time1, String.valueOf(num));
+                time = countersSpec.getFields().substring(0, 14) + "00:00";
+                jedis.hincrBy(countersSpec.getKeyFields(), time,-Long.parseLong(countersSpec.getValueFields()));
                 break;
         }
     }
